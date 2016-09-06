@@ -1,0 +1,32 @@
+'.source.cns':
+  'Func … End':
+    'prefix': '->'
+    'body': '->\n\t${1:# expressions...}\nend'
+  'Cond … End':
+    'prefix': 'cond'
+    'body': 'cond\n\t${1:# condition -> ...}\nend'
+  'Def … End':
+    'prefix': 'def'
+    'body': 'def\n\t${1:# name(pattern) -> ...}\nend'
+  'Match … End':
+    'prefix': 'match'
+    'body': 'match\n\t${1:# pattern -> ...}\nend'
+  'Caseof … End':
+    'prefix': 'caseof'
+    'body': 'caseof ${1:value}:\n  ${2:condition} -> ${0:# body...}\nend'
+  'Try … Catch':
+    'prefix': 'try'
+    'body': 'try fn -> ${1:# body...}:\ncatch fn ${2:err} -> ${0:# body...}'
+  'log':
+    'prefix': 'log'
+    'body': 'console.log $0'
+  'warn':
+    'prefix': 'warn'
+    'body': 'console.warn $0'
+  'error':
+    'prefix': 'error'
+    'body': 'console.error $0'
+'.string.quoted.double.cns:not(.string .source), .string.quoted.double.heredoc.cns:not(.string .source)':
+  'Interpolated Code':
+    'prefix': '#'
+    'body': '#{$1}$2'

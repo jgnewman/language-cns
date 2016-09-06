@@ -1,0 +1,649 @@
+'scopeName': 'source.cns'
+'name': 'Cream & Sugar'
+'fileTypes': [
+  'cns'
+]
+'firstLineMatch': '^#!.*\\bcns'
+'patterns': [
+  {
+    'comment': 'MATCHES a backtick string'
+    'begin': '`'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.cns'
+    'end': '`'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.cns'
+    'name': 'string.quoted.script.cns'
+    'patterns': [
+      {
+        'match': '\\\\(x\\h{2}|[0-2][0-7]{0,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.)'
+        'name': 'constant.character.escape.cns'
+      }
+      {
+        'include': '#interpolated_cns'
+      }
+    ]
+  }
+  {
+    'comment': 'MATCHES a comment'
+    'begin': '#'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.comment.cns'
+    'end': '$'
+    'name': 'comment.line.number-sign.cns'
+  }
+  {
+    'comment': 'MATCHES a regular expression'
+    'begin': '/(?=(?![ /*+?])([^\\\\]|\\\\.)*?/[igmy]{0,4}(?![a-zA-Z0-9]))'
+    'end': '(/)[imgy]{0,4}'
+    'name': 'string.regexp.cns'
+    'patterns': [
+      {
+        'include': 'source.js.regexp'
+      }
+    ]
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.js'
+    'endCaptures':
+      '1':
+        'name': 'punctuation.definition.string.begin.js'
+  }
+  # {
+  #   'comment': 'MATCHES html'
+  #   'begin': '(<)([a-zA-Z0-9:-]++)(?=[^>]*></\\2>)'
+  #   'beginCaptures':
+  #     '1':
+  #       'name': 'source.cns'
+  #     '2':
+  #       'name': 'variable.other.readwrite.instance.cns'
+  #   'end': '(>(\\s*<)/)(\\2)(>)'
+  #   'endCaptures':
+  #     '1':
+  #       'name': 'source.cns'
+  #     '2':
+  #       'name': 'source.cns'
+  #     '3':
+  #       'name': 'variable.other.readwrite.instance.cns'
+  #     '4':
+  #       'name': 'source.cns'
+  #   'name': 'meta.tag.any.html'
+  #   'patterns': [
+  #     {
+  #       'include': '#tag-html-attribute'
+  #     }
+  #   ]
+  # }
+  {
+    'comment': 'MATCHES opening html'
+    'match': '(<)([a-zA-Z0-9\-]+)'
+    'captures':
+      '1':
+        'name': 'source.cns'
+      '2':
+        'name': 'constant.language.cns'
+  }
+  {
+    'comment': 'MATCHES closing html'
+    'match': '(<\/)([a-zA-Z0-9\-]+)(>)'
+    'captures':
+      '1':
+        'name': 'source.cns'
+      '2':
+        'name': 'constant.language.cns'
+      '3':
+        'name': 'source.cns'
+  }
+  {
+    'comment': 'MATCHES a control word'
+    'match': '\\b(?<![\\.\\$])(caseof|catch|cond|def|else|end|fn|for|from|in|if|match|try|when|(?<=for)\\s+own)(?!\\s*:)\\b'
+    'name': 'keyword.control.cns'
+  }
+  {
+    'comment': 'MATCHES an operation expression like: x + y'
+    'match': '(<<|>>>?|(?<!\\()\\/|[=!<>*%+\\-&^])?=(?!>)|[!%^*\\/?:]|\\-?\\-(?!>)|\\+\\+?|<>|<|>|&&?|\\.\\.\\.?|\\|\\|?|\\b(?<![\\.\\$])(new|delete|super)(?!\\s*:)\\b'
+    'name': 'keyword.operator.cns'
+  }
+  {
+    'comment': 'MATCHES an operation expression like: x and y'
+    'match': '(and|or|(?<!\\()\\/|[=!<>*%+\\-&^])?=(?!>)|[!%^*\\/?:]|\\-?\\-(?!>)|\\+\\+?|<>|<|>|&&?|\\.\\.\\.?|\\|\\|?|\\b(?<![\\.\\$])(and|or|is|isnt|not|no|lte|gte|lt|gt|dv|rm)(?!\\s*:)\\b'
+    'name': 'variable.assignment.cns'
+  }
+  # {
+  #   'comment': 'the original from which the previous two rules were derived'
+  #   'match': '(and|or|<<|>>>?|(?<!\\()\\/|[=!<>*%+\\-&^])?=(?!>)|[!%^*\\/~?:]|\\-?\\-(?!>)|\\+\\+?|<>|<|>|&&?|\\.\\.\\.?|\\|\\|?|\\b(?<![\\.\\$])(new|delete|and|or|is|isnt|not|no|super)(?!\\s*:)\\b'
+  #   'name': 'keyword.operator.cns'
+  # }
+  {
+    'comment': 'MATCHES a reserved function name'
+    'match': '\\b(?<![\\.\\$])(create|dom|domArray|do|elem|eql|export|head|import|instanceof|last|lead|random|remove|tail|throw|typeof|update)(?!\\s*:)\\b'
+    'name': 'keyword.reserved.cns'
+  }
+  {
+    'comment': 'MATCHES variable assignments'
+    'match': '([a-zA-Z$_][\\w$]*)\\s*(?!::)(?:(:)|((?:or|and|[-+\\/&%*?])?=)(?![>=]))(?!(\\s*\\(.*\\))?\\s*([=-]>))'
+    'captures':
+      '1':
+        'name': 'variable.assignment.cns'
+      '2':
+        'name': 'punctuation.separator.key-value'
+      '3':
+        'name': 'keyword.operator.cns'
+  }
+  {
+    'comment': 'MATCHES a destructured variable assignment like: {x, y} = z'
+    'begin': '(?<=\\s|^)(\\{)(?=.+?\\}\\s+[:=])'
+    'beginCaptures':
+      '0':
+        'name': 'keyword.operator.cns'
+    'end': '(\\}\\s*[:=])'
+    'endCaptures':
+      '0':
+        'name': 'keyword.operator.cns'
+    'name': 'meta.variable.assignment.destructured.object.cns'
+    'patterns': [
+      {
+        'include': '#variable_name'
+      }
+      {
+        'include': '#instance_variable'
+      }
+      {
+        'include': '#atom'
+      }
+      {
+        'include': '#single_quoted_string'
+      }
+      {
+        'include': '#backtick_quoted_string'
+      }
+      {
+        'include': '#double_quoted_string'
+      }
+      {
+        'include': '#numeric'
+      }
+    ]
+  }
+  {
+    'comment': 'MATCHES a destructured variable assignment like: [x|y] = z'
+    'begin': '(?<=\\s|^)(\\[)(?=.+?\\]\\s+[:=])'
+    'beginCaptures':
+      '0':
+        'name': 'keyword.operator.cns'
+    'end': '(\\]\\s*[:=])'
+    'endCaptures':
+      '0':
+        'name': 'keyword.operator.cns'
+    'name': 'meta.variable.assignment.destructured.array.cns'
+    'patterns': [
+      {
+        'include': '#variable_name'
+      }
+      {
+        'include': '#instance_variable'
+      }
+      {
+        'include': '#atom'
+      }
+      {
+        'include': '#single_quoted_string'
+      }
+      {
+        'include': '#backtick_quoted_string'
+      }
+      {
+        'include': '#double_quoted_string'
+      }
+      {
+        'include': '#numeric'
+      }
+    ]
+  }
+  {
+    'comment': 'MATCHES a boolean true'
+    'match': '\\b(?<!\\.|::)(true)(?!\\s*[:=][^=])\\b'
+    'name': 'constant.language.boolean.true.cns'
+  }
+  {
+    'comment': 'MATCHES a boolean false'
+    'match': '\\b(?<!\\.|::)(false)(?!\\s*[:=][^=])\\b'
+    'name': 'constant.language.boolean.false.cns'
+  }
+  {
+    'comment': 'MATCHES function calls'
+    'match': '(?<!,\\s)(?<!,)@?\\b(?!decodeURI(Component)?|encodeURI(Component)?|eval|parse(Float|Int))(\\w+)(?=\\s+(?!(end|lte|gte|lt|gt|dv|rm|of|in|is|isnt|and|or|for|else|when|no|if)\\b)(?=(@?\\w+|\\-\\d|\\[|\\{|\"|\'|\`))|(?=\\())'
+    'captures':
+      '4':
+        'name': 'entity.name.function.cns'
+  }
+  {
+    'comment': 'MATCHES a lone arrow as a function'
+    'match': '[=-]>'
+    'name': 'storage.type.function.cns'
+  }
+  {
+    'comment': 'MATCHES null'
+    'match': '\\b(?<!\\.|::)null(?!\\s*[:=][^=])\\b'
+    'name': 'constant.language.null.cns'
+  }
+  {
+    'comment': 'MATCHES "this"'
+    'match': '\\b(?<!\\.)this(?!\\s*[:=][^=])\\b'
+    'name': 'variable.language.this.cns'
+  }
+  {
+    'comment': 'MATCHES a weird keyword'
+    'match': '\\b(debugger|\\\\)\\b'
+    'name': 'keyword.other.cns'
+  }
+  {
+    'comment': 'MATCHES a native type'
+    'match': '\\b(Array|ArrayBuffer|Blob|Boolean|Date|document|Function|Int(8|16|32|64)Array|Math|Map|Number|Object|Proxy|RegExp|Set|String|WeakMap|window|Uint(8|16|32|64)Array|XMLHttpRequest)\\b'
+    'name': 'support.class.cns'
+  }
+  {
+    'comment': 'MATCHES a weird keyword'
+    'match': '\\b(console)\\b'
+    'name': 'entity.name.type.object.cns'
+  }
+  {
+    'comment': 'MATCHES console method'
+    'match': '((?<=console\\.)(debug|warn|info|log|error|time|timeEnd|assert))\\b'
+    'name': 'support.function.console.cns'
+  }
+  {
+    'comment': 'MATCHES more weird keywords'
+    'match': '\\b(decodeURI(Component)?|encodeURI(Component)?|eval|parse(Float|Int)|require)\\b'
+    'name': 'support.function.cns'
+  }
+  {
+    'comment': 'MATCHES array prototype functions'
+    'match': '((?<=\\.)(apply|call|concat|every|filter|forEach|from|hasOwnProperty|indexOf|isPrototypeOf|join|lastIndexOf|map|of|pop|propertyIsEnumerable|push|reduce(Right)?|reverse|shift|slice|some|sort|splice|to(Locale)?String|unshift|valueOf))\\b'
+    'name': 'support.function.method.array.cns'
+  }
+  {
+    'comment': 'MATCHES a native array method'
+    'match': '((?<=Array\\.)(isArray))\\b'
+    'name': 'support.function.static.array.cns'
+  }
+  {
+    'comment': 'MATCHES object prototype functions'
+    'match': '((?<=Object\\.)(create|definePropert(ies|y)|freeze|getOwnProperty(Descriptors?|Names)|getProperty(Descriptor|Names)|getPrototypeOf|is(Extensible|Frozen|Sealed)?|isnt|keys|preventExtensions|seal))\\b'
+    'name': 'support.function.static.object.cns'
+  }
+  {
+    'comment': 'MATCHES math prototype functions'
+    'match': '((?<=Math\\.)(abs|acos|acosh|asin|asinh|atan|atan2|atanh|ceil|cos|cosh|exp|expm1|floor|hypot|log|log10|log1p|log2|max|min|pow|random|round|sign|sin|sinh|sqrt|tan|tanh|trunc))\\b'
+    'name': 'support.function.static.math.cns'
+  }
+  {
+    'comment': 'MATCHES native math functions'
+    'match': '((?<=Number\\.)(is(Finite|Integer|NaN)|toInteger))\\b'
+    'name': 'support.function.static.number.cns'
+  }
+  {
+    'comment': 'MATCHES some global keywords'
+    'match': '(?<!\\.)\\b(module|exports|__filename|__dirname|global|process)(?!\\s*:)\\b'
+    'name': 'support.variable.cns'
+  }
+  {
+    'comment': 'MATCHES some language constants'
+    'match': '\\b(default|Infinity|NaN|undefined)\\b'
+    'name': 'constant.language.cns'
+  }
+  {
+    'comment': 'MATCHES an escape'
+    'match': '\\;'
+    'name': 'punctuation.terminator.statement.cns'
+  }
+  {
+    'comment': 'MATCHES a comma'
+    'match': ','
+    'name': 'meta.delimiter.object.comma.cns'
+  }
+  {
+    'comment': 'MATCHES a slashdot'
+    'match': '\\.'
+    'name': 'meta.delimiter.method.period.cns'
+  }
+  {
+    'comment': 'MATCHES curly braces'
+    'match': '\\{|\\}'
+    'name': 'meta.brace.curly.cns'
+  }
+  {
+    'comment': 'MATCHES parens'
+    'match': '\\(|\\)'
+    'name': 'meta.brace.round.cns'
+  }
+  {
+    'comment': 'MATCHES square brackets'
+    'match': '\\[|\\]\\s*'
+    'name': 'meta.brace.square.cns'
+  }
+  {
+    'include': '#instance_variable'
+  }
+  {
+    'include': '#atom'
+  }
+  {
+    'include': '#single_quoted_string'
+  }
+  {
+    'include': '#backtick_quoted_string'
+  }
+  {
+    'include': '#double_quoted_string'
+  }
+  {
+    'include': '#numeric'
+  }
+]
+'repository':
+  'tag-html-attribute':
+    'begin': '\\b([^\\=]+)\\b\\s*(=)'
+    'captures':
+      '1':
+        'name': 'constant.language.cns'
+      '2':
+        'name': 'source.cns'
+    'end': '(?<=\'|"|\})|(?=\\s|>)'
+    'name': 'meta.attribute-with-value.id.cns'
+    'patterns': [
+      {
+        'begin': '"'
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.definition.string.begin.cns'
+        'contentName': 'meta.toc-list.id.cns'
+        'end': '"'
+        'endCaptures':
+          '0':
+            'name': 'punctuation.definition.string.end.cns'
+        'name': 'string.quoted.double.cns'
+      }
+      {
+        'begin': '\''
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.definition.string.begin.cns'
+        'contentName': 'meta.toc-list.id.cns'
+        'end': '\''
+        'endCaptures':
+          '0':
+            'name': 'punctuation.definition.string.end.cns'
+        'name': 'string.quoted.single.cns'
+      }
+      {
+        'begin': '\{'
+        'beginCaptures':
+          '0':
+            'name': 'meta.brace.curly.cns'
+        'contentName': 'meta.toc-list.id.cns'
+        'end': '\}'
+        'endCaptures':
+          '0':
+            'name': 'meta.brace.curly.cns'
+        'name': 'source.cns'
+      }
+    ]
+  'embedded_comment':
+    'patterns': [
+      {
+        'captures':
+          '1':
+            'name': 'punctuation.definition.comment.cns'
+        'match': '(?<!\\\\)(#).*$\\n?'
+        'name': 'comment.line.number-sign.cns'
+      }
+    ]
+  'instance_variable':
+    'comment': 'MATCHES an identifier with @ on the front'
+    'patterns': [
+      {
+        'match': '(@)([a-zA-Z_\\$]\\w*)?'
+        'name': 'variable.other.readwrite.instance.cns'
+      }
+    ]
+  'atom':
+    'comment': 'MATCHES an identifier with @ on the front'
+    'patterns': [
+      {
+        'match': '(\\~)([a-zA-Z_\\$]\\w*)?'
+        'captures':
+          '1':
+            'name': 'language.source.cns'
+          '2':
+            'name': 'language.constant.cns'
+      }
+    ]
+  'interpolated_cns':
+    'comment': 'MATCHES an interpolation in a string'
+    'patterns': [
+      {
+        'begin': '\\$\\{'
+        'captures':
+          '0':
+            'name': 'punctuation.section.embedded.cns'
+        'end': '\\}'
+        'name': 'source.cns.embedded.source'
+        'patterns': [
+          {
+            'include': '$self'
+          }
+        ]
+      }
+    ]
+  'numeric':
+    'comment': 'MATCHES all the weird number forms'
+    'patterns': [
+      {
+        'match': '(?<!\\$)\\b((0([box])[0-9a-fA-F]+)|([0-9]+(\\.[0-9]+)?(e[+\\-]?[0-9]+)?))\\b'
+        'name': 'constant.numeric.cns'
+      }
+    ]
+  'single_quoted_string':
+    'comment': 'MATCHES a single quoted string'
+    'patterns': [
+      {
+        'begin': '\''
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.definition.string.begin.cns'
+        'end': '\''
+        'endCaptures':
+          '0':
+            'name': 'punctuation.definition.string.end.cns'
+        'name': 'string.quoted.single.cns'
+        'patterns': [
+          {
+            'match': '\\\\(x\\h{2}|[0-2][0-7]{0,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.)'
+            'name': 'constant.character.escape.cns'
+          }
+          {
+            'include': '#interpolated_cns'
+          }
+        ]
+      }
+    ]
+  'backtick_quoted_string':
+    'comment': 'MATCHES a backtick quoted string'
+    'patterns': [
+      {
+        'begin': '\`'
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.definition.string.begin.cns'
+        'end': '\`'
+        'endCaptures':
+          '0':
+            'name': 'punctuation.definition.string.end.cns'
+        'name': 'string.quoted.script.cns'
+        'patterns': [
+          {
+            'match': '\\\\(x\\h{2}|[0-2][0-7]{0,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.)'
+            'name': 'constant.character.escape.cns'
+          }
+          {
+            'include': '#interpolated_cns'
+          }
+        ]
+      }
+    ]
+  'double_quoted_string':
+    'comment': 'MATCHES a double quoted string'
+    'patterns': [
+      {
+        'begin': '"'
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.definition.string.begin.cns'
+        'end': '"'
+        'endCaptures':
+          '0':
+            'name': 'punctuation.definition.string.end.cns'
+        'name': 'string.quoted.single.cns'
+        'patterns': [
+          {
+            'match': '\\\\(x\\h{2}|[0-2][0-7]{0,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.)'
+            'name': 'constant.character.escape.cns'
+          }
+        ]
+      }
+    ]
+  'variable_name':
+    'comment': 'MATCHES an identifier with no @ on the front'
+    'patterns': [
+      {
+        'captures':
+          '1':
+            'name': 'variable.assignment.cns'
+        'match': '([a-zA-Z\\$_]\\w*(\\.\\w+)*)'
+        'name': 'variable.assignment.cns'
+      }
+    ]
+  'regex-character-class':
+    'comment': 'MATCHES all the weird regexp forms'
+    'patterns': [
+      {
+        'match': '\\\\[wWsSdD]|\\.'
+        'name': 'constant.character.character-class.regexp'
+      }
+      {
+        'match': '\\\\([0-7]{3}|x\\h\\h|u\\h\\h\\h\\h)'
+        'name': 'constant.character.numeric.regexp'
+      }
+      {
+        'match': '\\\\c[A-Z]'
+        'name': 'constant.character.control.regexp'
+      }
+      {
+        'match': '\\\\.'
+        'name': 'constant.character.escape.backslash.regexp'
+      }
+    ]
+  'heregexp':
+    'comment': 'MATCHES more weird regexp forms'
+    'patterns': [
+      {
+        'match': '\\\\[bB]|\\^|\\$'
+        'name': 'keyword.control.anchor.regexp'
+      }
+      {
+        'match': '\\\\[1-9]\\d*'
+        'name': 'keyword.other.back-reference.regexp'
+      }
+      {
+        'match': '[?+*]|\\{(\\d+,\\d+|\\d+,|,\\d+|\\d+)\\}\\??'
+        'name': 'keyword.operator.quantifier.regexp'
+      }
+      {
+        'match': '\\|'
+        'name': 'keyword.operator.or.regexp'
+      }
+      {
+        'begin': '(\\()((\\?=)|(\\?!))'
+        'beginCaptures':
+          '1':
+            'name': 'punctuation.definition.group.regexp'
+          '3':
+            'name': 'meta.assertion.look-ahead.regexp'
+          '4':
+            'name': 'meta.assertion.negative-look-ahead.regexp'
+        'end': '(\\))'
+        'endCaptures':
+          '1':
+            'name': 'punctuation.definition.group.regexp'
+        'name': 'meta.group.assertion.regexp'
+        'patterns': [
+          {
+            'include': '#heregexp'
+          }
+        ]
+      }
+      {
+        'begin': '\\((\\?:)?'
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.definition.group.regexp'
+        'end': '\\)'
+        'endCaptures':
+          '0':
+            'name': 'punctuation.definition.group.regexp'
+        'name': 'meta.group.regexp'
+        'patterns': [
+          {
+            'include': '#heregexp'
+          }
+        ]
+      }
+      {
+        'begin': '(\\[)(\\^)?'
+        'beginCaptures':
+          '1':
+            'name': 'punctuation.definition.character-class.regexp'
+          '2':
+            'name': 'keyword.operator.negation.regexp'
+        'end': '(\\])'
+        'endCaptures':
+          '1':
+            'name': 'punctuation.definition.character-class.regexp'
+        'name': 'constant.other.character-class.set.regexp'
+        'patterns': [
+          {
+            'captures':
+              '1':
+                'name': 'constant.character.numeric.regexp'
+              '2':
+                'name': 'constant.character.control.regexp'
+              '3':
+                'name': 'constant.character.escape.backslash.regexp'
+              '4':
+                'name': 'constant.character.numeric.regexp'
+              '5':
+                'name': 'constant.character.control.regexp'
+              '6':
+                'name': 'constant.character.escape.backslash.regexp'
+            'match': '(?:.|(\\\\(?:[0-7]{3}|x\\h\\h|u\\h\\h\\h\\h))|(\\\\c[A-Z])|(\\\\.))\\-(?:[^\\]\\\\]|(\\\\(?:[0-7]{3}|x\\h\\h|u\\h\\h\\h\\h))|(\\\\c[A-Z])|(\\\\.))'
+            'name': 'constant.other.character-class.range.regexp'
+          }
+          {
+            'include': '#regex-character-class'
+          }
+        ]
+      }
+      {
+        'include': '#regex-character-class'
+      }
+      {
+        'include': '#interpolated_cns'
+      }
+      {
+        'include': '#embedded_comment'
+      }
+    ]
