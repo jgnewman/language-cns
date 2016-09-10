@@ -27,6 +27,21 @@
     ]
   }
   {
+    'comment': 'MATCHES multi-line comments'
+    'begin': '(?<!#)###(?!#)'
+    'captures':
+      '0':
+        'name': 'punctuation.definition.comment.cns'
+    'end': '###(?:[ \\t]*\\n)'
+    'name': 'comment.block.cns'
+    'patterns': [
+      {
+        'match': '(?<=^|\\s)@\\w*(?=\\s)'
+        'name': 'storage.type.annotation.cns'
+      }
+    ]
+  }
+  {
     'comment': 'MATCHES a comment'
     'begin': '#'
     'beginCaptures':
@@ -42,41 +57,16 @@
     'name': 'string.regexp.cns'
     'patterns': [
       {
-        'include': 'source.js.regexp'
+        'include': 'source.cns.regexp'
       }
     ]
     'beginCaptures':
       '0':
-        'name': 'punctuation.definition.string.begin.js'
+        'name': 'punctuation.definition.string.begin.cns'
     'endCaptures':
       '1':
-        'name': 'punctuation.definition.string.begin.js'
+        'name': 'punctuation.definition.string.begin.cns'
   }
-  # {
-  #   'comment': 'MATCHES html'
-  #   'begin': '(<)([a-zA-Z0-9:-]++)(?=[^>]*></\\2>)'
-  #   'beginCaptures':
-  #     '1':
-  #       'name': 'source.cns'
-  #     '2':
-  #       'name': 'variable.other.readwrite.instance.cns'
-  #   'end': '(>(\\s*<)/)(\\2)(>)'
-  #   'endCaptures':
-  #     '1':
-  #       'name': 'source.cns'
-  #     '2':
-  #       'name': 'source.cns'
-  #     '3':
-  #       'name': 'variable.other.readwrite.instance.cns'
-  #     '4':
-  #       'name': 'source.cns'
-  #   'name': 'meta.tag.any.html'
-  #   'patterns': [
-  #     {
-  #       'include': '#tag-html-attribute'
-  #     }
-  #   ]
-  # }
   {
     'comment': 'MATCHES opening html'
     'match': '(<)([a-zA-Z0-9\-]+)'
