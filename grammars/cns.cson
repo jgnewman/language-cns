@@ -94,7 +94,7 @@
   }
   {
     'comment': 'MATCHES an operation expression like: x + y'
-    'match': '(<<|>>>?|(?<!\\()\\/|[=!<>*%+\\-&^])?=(?!>)|[!%^*\\/?:]|\\-?\\-(?!>)|\\+\\+?|<>|<|>|&&?|\\.\\.\\.?|\\|\\|?|\\b(?<![\\.\\$])(new|delete|super)(?!\\s*:)\\b'
+    'match': '(>>=|<<|>>>?|(?<!\\()\\/|[=!<>*%+\\-&^])?=(?!>)|[!%^*\\/?:]|\\-?\\-(?!>)|\\+\\+?|<>|<|>|&&?|\\.\\.\\.?|\\|\\|?|\\b(?<![\\.\\$])(new|delete|super)(?!\\s*:)\\b'
     'name': 'keyword.operator.cns'
   }
   {
@@ -125,7 +125,7 @@
   }
   {
     'comment': 'MATCHES a destructured variable assignment like: {x, y} = z'
-    'begin': '(?<=\\s|^)(\\{)(?=.+?\\}\\s+[:=])'
+    'begin': '(?<=\\s|^)(\\{\\{?)(?=.+?\\}\\}?\\s+[:=])'
     'beginCaptures':
       '0':
         'name': 'keyword.operator.cns'
