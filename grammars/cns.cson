@@ -94,7 +94,7 @@
   }
   {
     'comment': 'MATCHES an operation expression like: x + y'
-    'match': '(>>=|<<|>>>?|(?<!\\()\\/|[=!<>*%+\\-&^])?=(?!>)|[!%^*\\/?:]|\\-?\\-(?!>)|\\+\\+?|<>|<|>|&&?|\\.\\.\\.?|\\|\\|?|\\b(?<![\\.\\$])(new|delete|super)(?!\\s*:)\\b'
+    'match': '(<<|>>>?|(?<!\\()\\/|[=!<>*%+\\-&^])?=(?!>)|[!%^*\\/?:]|\\-?\\-(?!>)|\\+\\+?|<>|<|>|&&?|\\.\\.\\.?|\\|\\|?|\\b(?<![\\.\\$])(new|delete|super)(?!\\s*:)\\b'
     'name': 'keyword.operator.cns'
   }
   {
@@ -213,6 +213,11 @@
   {
     'comment': 'MATCHES a lone arrow as a function'
     'match': '[=-]>'
+    'name': 'storage.type.function.cns'
+  }
+  {
+    'comment': 'MATCHES a bind operator'
+    'match': '>>='
     'name': 'storage.type.function.cns'
   }
   {
