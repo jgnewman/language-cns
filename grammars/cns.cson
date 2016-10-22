@@ -94,7 +94,7 @@
   }
   {
     'comment': 'MATCHES a control word'
-    'match': '\\b(?<![\\.\\$])(caseof|catch|cond|def|else|end|fn|for|from|incase|in|if|match|throws|try|when|(?<=for)\\s+own)(?!\\s*:)\\b'
+    'match': '\\b(?<![\\.\\$])(caseof|catch|cond|def|else|end|fn|for|from|incase|in|if|match|then|throws|try|when|(?<=for)\\s+own)(?!\\s*:)\\b'
     'name': 'keyword.control.cns'
   }
   {
