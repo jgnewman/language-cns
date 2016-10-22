@@ -406,10 +406,10 @@
       }
     ]
   'atom':
-    'comment': 'MATCHES an identifier with @ on the front'
+    'comment': 'MATCHES an atom'
     'patterns': [
       {
-        'match': '(\\~)([a-zA-Z_\\$]\\w*)?'
+        'match': '([A-Z])([A-Z_\\$]\\w*)?'
         'captures':
           '1':
             'name': 'language.source.cns'
