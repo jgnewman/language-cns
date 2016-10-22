@@ -409,10 +409,8 @@
     'comment': 'MATCHES an atom'
     'patterns': [
       {
-        'match': '([A-Z][A-Z_\\$]\\w*)?'
-        'captures':
-          '1':
-            'name': 'language.constant.cns'
+        'match': '([A-Z])([A-Z_\\$]\\w*)'
+        'name': 'language.constant.cns'
       }
     ]
   'interpolated_cns':
