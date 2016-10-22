@@ -6,6 +6,11 @@
 'firstLineMatch': '^#!.*\\bcns'
 'patterns': [
   {
+    'comment': 'MATCHES a bind operator'
+    'match': '>>='
+    'name': 'storage.type.function.cns'
+  }
+  {
     'comment': 'MATCHES a backtick string'
     'begin': '`'
     'beginCaptures':
@@ -213,11 +218,6 @@
   {
     'comment': 'MATCHES a lone arrow as a function'
     'match': '[=-]>'
-    'name': 'storage.type.function.cns'
-  }
-  {
-    'comment': 'MATCHES a bind operator'
-    'match': '>>='
     'name': 'storage.type.function.cns'
   }
   {
