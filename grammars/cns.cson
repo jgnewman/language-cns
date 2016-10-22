@@ -412,7 +412,7 @@
         'match': '([A-Z])([A-Z_\\$]\\w*)?'
         'captures':
           '1':
-            'name': 'language.source.cns'
+            'name': 'language.constant.cns'
           '2':
             'name': 'language.constant.cns'
       }
