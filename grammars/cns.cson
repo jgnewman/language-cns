@@ -129,7 +129,7 @@
     'beginCaptures':
       '0':
         'name': 'keyword.operator.cns'
-    'end': '(\\}\\s*[:=])'
+    'end': '(\\}\\}?\\s*[:=])'
     'endCaptures':
       '0':
         'name': 'keyword.operator.cns'
