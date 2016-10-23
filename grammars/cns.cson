@@ -214,8 +214,13 @@
         'name': 'entity.name.function.cns'
   }
   {
+    'comment': 'MATCHES a scope binding operator'
+    'match': '::'
+    'name': 'storage.type.function.cns'
+  }
+  {
     'comment': 'MATCHES a lone arrow as a function'
-    'match': '(::\s*)?[=-]>'
+    'match': '[=-]>'
     'name': 'storage.type.function.cns'
   }
   {
