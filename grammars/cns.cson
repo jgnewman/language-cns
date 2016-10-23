@@ -119,11 +119,13 @@
   }
   {
     'comment': 'MATCHES variable assignments'
-    'match': '([a-zA-Z$_][\\w$]*)\\s*(?:(:)|((?:or|and|[-+\\/&%*?])?=)(?![>=]))(?!(\\s*\\(.*\\))?\\s*((::\s*)?[=-]>))'
+    'match': '([a-zA-Z$_][\\w$]*)\\s*(?!::)(?:(:)|((?:or|and|[-+\\/&%*?])?=)(?![>=]))(?!(\\s*\\(.*\\))?\\s*((::)?[=-]>))'
     'captures':
       '1':
         'name': 'variable.assignment.cns'
       '2':
+        'name': 'punctuation.separator.key-value'
+      '3':
         'name': 'keyword.operator.cns'
   }
   {
@@ -198,12 +200,12 @@
   }
   {
     'comment': 'MATCHES a boolean true'
-    'match': '\\b(?<!\\.)(true)(?!\\s*[:=][^=])\\b'
+    'match': '\\b(?<!\\.|::)(true)(?!\\s*[:=][^=])\\b'
     'name': 'constant.language.boolean.true.cns'
   }
   {
     'comment': 'MATCHES a boolean false'
-    'match': '\\b(?<!\\.)(false)(?!\\s*[:=][^=])\\b'
+    'match': '\\b(?<!\\.|::)(false)(?!\\s*[:=][^=])\\b'
     'name': 'constant.language.boolean.false.cns'
   }
   {
@@ -225,7 +227,7 @@
   }
   {
     'comment': 'MATCHES null'
-    'match': '\\b(?<!\\.)null(?!\\s*[:=][^=])\\b'
+    'match': '\\b(?<!\\.|::)null(?!\\s*[:=][^=])\\b'
     'name': 'constant.language.null.cns'
   }
   {
