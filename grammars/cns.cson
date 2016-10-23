@@ -119,7 +119,7 @@
   }
   {
     'comment': 'MATCHES variable assignments'
-    'match': '([a-zA-Z$_][\\w$]*)\\s*(?!::)(?:(:)|((?:or|and|[-+\\/&%*?])?=)(?![>=]))(?!(\\s*\\(.*\\))?\\s*([=-]>))'
+    'match': '([a-zA-Z$_][\\w$]*)\\s*(?!::)(?:(:)|((?:or|and|[-+\\/&%*?])?=)(?![>=]))(?!(\\s*\\(.*\\))?\\s*((::)?[=-]>))'
     'captures':
       '1':
         'name': 'variable.assignment.cns'
@@ -130,7 +130,7 @@
   }
   {
     'comment': 'MATCHES a destructured variable assignment like: {x, y} = z'
-    'begin': '(?<=\\s|^)(\\{\\{?)(?=.+?\\}\\}?\\s+[:=])'
+    'begin': '(?<=\\s|^)(\\{\\{?)(?=.+?\\}\\}?\\s+[:=][^\>])'
     'beginCaptures':
       '0':
         'name': 'keyword.operator.cns'
@@ -217,7 +217,7 @@
   }
   {
     'comment': 'MATCHES a lone arrow as a function'
-    'match': '[=-]>'
+    'match': '(::)?[=-]>'
     'name': 'storage.type.function.cns'
   }
   {
