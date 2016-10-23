@@ -6,6 +6,11 @@
 'firstLineMatch': '^#!.*\\bcns'
 'patterns': [
   {
+    'comment': 'MATCHES a scope binding operator'
+    'match': '::'
+    'name': 'storage.type.function.cns'
+  }
+  {
     'comment': 'MATCHES a bind operator'
     'match': '>>='
     'name': 'storage.type.function.cns'
@@ -119,7 +124,7 @@
   }
   {
     'comment': 'MATCHES variable assignments'
-    'match': '([a-zA-Z$_][\\w$]*)\\s*(?!::)(?:(:)|((?:or|and|[-+\\/&%*?])?=)(?![>=]))(?!(\\s*\\(.*\\))?\\s*((::)?[=-]>))'
+    'match': '([a-zA-Z$_][\\w$]*)\\s*(?!::)(?:(:)|((?:or|and|[-+\\/&%*?])?=)(?![>=]))(?!(\\s*\\(.*\\))?\\s*([=-]>))'
     'captures':
       '1':
         'name': 'variable.assignment.cns'
@@ -214,11 +219,6 @@
     'captures':
       '4':
         'name': 'entity.name.function.cns'
-  }
-  {
-    'comment': 'MATCHES a scope binding operator'
-    'match': '::'
-    'name': 'storage.type.function.cns'
   }
   {
     'comment': 'MATCHES a lone arrow as a function'
