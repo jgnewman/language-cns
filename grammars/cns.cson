@@ -119,7 +119,7 @@
   # }
   {
     'comment': 'MATCHES a reserved function name'
-    'match': '\\b(?<![\\.\\$])(create|dom|domArray|do|elem|eql|export|head|import|instanceof|last|lead|random|remove|tail|throw|type|update)(?!\\s*:)\\b'
+    'match': '\\b(?<![\\.\\$])(apply|create|dom|domArray|do|elem|eql|export|head|import|instanceof|last|lead|random|remove|tail|throw|type|update)(?!\\s*:)\\b'
     'name': 'keyword.reserved.cns'
   }
   {
