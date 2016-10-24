@@ -1,22 +1,19 @@
 '.source.cns':
-  'Func … End':
-    'prefix': '->'
-    'body': '->\n\t${1:# expressions...}\nend'
-  'Cond … End':
-    'prefix': 'cond'
-    'body': 'cond\n\t${1:# condition -> ...}\nend'
-  'Def … End':
-    'prefix': 'def'
-    'body': 'def\n\t${1:# name(pattern) -> ...}\nend'
-  'Match … End':
+  'Func':
+    'prefix': '=>'
+    'body': '=>\n\t${1:# expressions...}\n'
+  'When':
+    'prefix': 'when'
+    'body': 'when\n\t${1:# condition -> ...}\n'
+  'Match':
     'prefix': 'match'
-    'body': 'match\n\t${1:# pattern -> ...}\nend'
-  'Caseof … End':
+    'body': 'match\n\t${1:# pattern -> ...}\n'
+  'Caseof':
     'prefix': 'caseof'
-    'body': 'caseof ${1:value}:\n  ${2:condition} -> ${0:# body...}\nend'
+    'body': 'caseof ${1:value}\n  ${2:condition} -> ${0:# body...}\n'
   'Try … Catch':
     'prefix': 'try'
-    'body': 'try\n\t${1:# body...}\ncatch ${2:err}:\n\t${0:# body...}\nend'
+    'body': 'try\n\t${1:# body...}\ncatch ${2:err}\n\t${0:# body...}\n'
   'log':
     'prefix': 'log'
     'body': 'console.log $0'
@@ -28,5 +25,5 @@
     'body': 'console.error $0'
 '.string.quoted.double.cns:not(.string .source), .string.quoted.double.heredoc.cns:not(.string .source)':
   'Interpolated Code':
-    'prefix': '#'
-    'body': '#{$1}$2'
+    'prefix': '$'
+    'body': '${$1}$2'
