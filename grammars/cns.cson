@@ -110,7 +110,7 @@
   }
   {
     'comment': 'MATCHES an operation expression like: x and y'
-    'match': '(and|or|(?<!\\()\\/|[=!<>*%+\\-&^])?=(?!>)|[!%^*\\/?:]|\\-?\\-(?!>)|\\+\\+?|<>|<|>|&&?|\\.\\.\\.?|\\|\\|?|\\b(?<![\\.\\$])(and|or|is|isnt|not|no|lte|gte|lt|gt|dv|rm)(?!\\s*:)\\b'
+    'match': '(and|or|(?<!\\()\\/|[=!<>*%+\\-&^])?=(?!>)|[!%^*\\/?:]|\\-?\\-(?!>)|\\+\\+?|\\/|\\%|<>|<|>|&&?|\\.\\.\\.?|\\|\\|?|\\b(?<![\\.\\$])(and|or|is|isnt|not|no|lte|gte|lt|gt)(?!\\s*:)\\b'
     'name': 'variable.assignment.cns'
   }
   # {
@@ -216,7 +216,7 @@
   }
   {
     'comment': 'MATCHES function calls'
-    'match': '(?<!,\\s)(?<!,)@?\\b(?!decodeURI(Component)?|encodeURI(Component)?|eval|parse(Float|Int))(\\w+)(?=\\s+(?!(end|lte|gte|lt|gt|dv|rm|of|in|is|isnt|and|or|for|else|onlyif|then|when|where|no|if)\\b)(?=(@?\\w+|\\-\\d|\\[|\\{|\"|\'|\`))|(?=\\())'
+    'match': '(?<!,\\s)(?<!,)@?\\b(?!decodeURI(Component)?|encodeURI(Component)?|eval|parse(Float|Int))(\\w+)(?=\\s+(?!(end|lte|gte|lt|gt|of|in|is|isnt|and|or|for|else|onlyif|then|when|where|no|if)\\b)(?=(@?\\w+|\\-\\d|\\[|\\{|\"|\'|\`))|(?=\\())'
     'captures':
       '4':
         'name': 'entity.name.function.cns'
