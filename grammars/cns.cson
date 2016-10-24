@@ -2,6 +2,7 @@
 'name': 'Cream & Sugar'
 'fileTypes': [
   'cns'
+  'cream'
 ]
 'firstLineMatch': '^#!.*\\bcns'
 'patterns': [
