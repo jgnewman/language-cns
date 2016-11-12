@@ -14,15 +14,6 @@
   'Try … Catch':
     'prefix': 'try'
     'body': 'try\n\t${1:# body...}\ncatch ${2:err}\n\t${0:# body...}\n'
-  'log':
-    'prefix': 'log'
-    'body': 'console.log $0'
-  'warn':
-    'prefix': 'warn'
-    'body': 'console.warn $0'
-  'error':
-    'prefix': 'error'
-    'body': 'console.error $0'
 '.string.quoted.double.cns:not(.string .source), .string.quoted.double.heredoc.cns:not(.string .source)':
   'Interpolated Code':
     'prefix': '$'

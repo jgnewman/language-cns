@@ -120,7 +120,7 @@
   # }
   {
     'comment': 'MATCHES a reserved function name'
-    'match': '\\b(?<![\\.\\$])(apply|create|dom|domArray|do|elem|eql|export|head|import|instanceof|last|lead|random|remove|tail|throw|type|update)(?!\\s*:)\\b'
+    'match': '\\b(?<![\\.\\$])(do|export|import|instanceof|throw)(?!\\s*:)\\b'
     'name': 'keyword.reserved.cns'
   }
   {
@@ -216,7 +216,7 @@
   }
   {
     'comment': 'MATCHES function calls'
-    'match': '(?<!,\\s)(?<!,)@?\\b(?!decodeURI(Component)?|encodeURI(Component)?|eval|parse(Float|Int))(\\w+)(?=\\s+(?!(end|lte|gte|lt|gt|of|in|is|isnt|and|or|for|else|onlyif|then|when|where|no|if)\\b)(?=(@?\\w+|\\-\\d|\\[|\\{|\"|\'|\`))|(?=\\())'
+    'match': '(?<!,\\s)(?<!,)@?\\b(?!decodeURI(Component)?|encodeURI(Component)?|eval|parse(Float|Int))(\\w+)(?=\\s+(?!(do|lte|gte|lt|gt|of|in|is|isnt|and|or|for|else|onlyif|then|throws|when|where|no|if)\\b)(?=(@?\\w+|\\-\\d|\\[|\\{|\"|\'|\`))|(?=\\())'
     'captures':
       '4':
         'name': 'entity.name.function.cns'
@@ -258,12 +258,17 @@
   }
   {
     'comment': 'MATCHES more weird keywords'
-    'match': '\\b(decodeURI(Component)?|encodeURI(Component)?|eval|parse(Float|Int)|require)\\b'
+    'match': '\\b(decodeURI(Component)?|encodeURI(Component)?|apply|aritize|arrayToTuple|create|debug|die|dom|domArray|elem|eql|eval|head|instanceof|kill|lang|last|lead|log|parse|random|range|receive|remove|reply|send|spawn|tail|throw|tupleToArray|tupleToObject|type|update|warn)\\b'
     'name': 'support.function.cns'
   }
+  # {
+  #   'comment': 'MATCHES more weird keywords'
+  #   'match': '\\b(decodeURI(Component)?|encodeURI(Component)?|eval|parse(Float|Int)|require)\\b'
+  #   'name': 'support.function.cns'
+  # }
   {
     'comment': 'MATCHES array prototype functions'
-    'match': '((?<=\\.)(apply|call|concat|every|filter|forEach|from|hasOwnProperty|indexOf|isPrototypeOf|join|lastIndexOf|map|of|pop|propertyIsEnumerable|push|reduce(Right)?|reverse|shift|slice|some|sort|splice|to(Locale)?String|unshift|valueOf))\\b'
+    'match': '((?<=\\.)(call|concat|every|filter|forEach|from|hasOwnProperty|indexOf|isPrototypeOf|join|lastIndexOf|map|of|pop|propertyIsEnumerable|push|reduce(Right)?|reverse|shift|slice|some|sort|splice|to(Locale)?String|unshift|valueOf))\\b'
     'name': 'support.function.method.array.cns'
   }
   {
