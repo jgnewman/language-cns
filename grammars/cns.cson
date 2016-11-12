@@ -216,7 +216,7 @@
   }
   {
     'comment': 'MATCHES function calls'
-    'match': '(?<!,\\s)(?<!,)@?\\b(?!decodeURI(Component)?|encodeURI(Component)?|apply|aritize|arrayToTuple|create|debug|die|dom|domArray|elem|eql|eval|head|instanceof|kill|lang|last|lead|log|parse|random|range|receive|remove|reply|send|spawn|tail|throw|tupleToArray|tupleToObject|type|update|warn|parse(Float|Int))(\\w+)(?=\\s+(?!(do|lte|gte|lt|gt|of|in|is|isnt|and|or|for|else|onlyif|then|throws|when|where|no|if)\\b)(?=(@?\\w+|\\-\\d|\\[|\\{|\"|\'|\`))|(?=\\())'
+    'match': '(?<!,\\s)(?<!,)@?\\b(?!decodeURI(Component)?|encodeURI(Component)?|eval|parse(Float|Int))(\\w+)(?=\\s+(?!(do|lte|gte|lt|gt|of|in|is|isnt|and|or|for|else|onlyif|then|throws|when|where|no|if)\\b)(?=(@?\\w+|\\-\\d|\\[|\\{|\"|\'|\`))|(?=\\())'
     'captures':
       '4':
         'name': 'entity.name.function.cns'
