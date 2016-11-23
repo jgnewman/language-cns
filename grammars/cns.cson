@@ -7,6 +7,11 @@
 'firstLineMatch': '^#!.*\\bcns'
 'patterns': [
   {
+    'comment': 'MATCHES a < symbol'
+    'match': '<'
+    'name': 'keyword.operator.cns'
+  }
+  {
     'comment': 'MATCHES a scope binding operator'
     'match': '::'
     'name': 'storage.type.function.cns'
@@ -100,7 +105,7 @@
   }
   {
     'comment': 'MATCHES a control word'
-    'match': '\\b(?<![\\.\\$])(caseof|catch|cond|def|else|end|fn|for|from|incase|in|if|match|onlyif|then|throws|try|when|where|(?<=for)\\s+own)(?!\\s*:)\\b'
+    'match': '\\b(?<![\\.\\$])(caseof|default|else|end|fn|for|from|incase|in|if|match|onlyif|then|throws|try|when|where|(?<=for)\\s+own)(?!\\s*:)\\b'
     'name': 'keyword.control.cns'
   }
   {
@@ -216,7 +221,7 @@
   }
   {
     'comment': 'MATCHES function calls'
-    'match': '(?<!,\\s)(?<!,)@?\\b(?!decodeURI(Component)?|encodeURI(Component)?|eval|parse(Float|Int))(\\w+)(?=\\s+(?!(do|lte|gte|lt|gt|of|in|is|isnt|and|or|for|else|onlyif|then|throws|when|where|no|if)\\b)(?=(@?\\w+|\\-\\d|\\[|\\{|\"|\'|\`))|(?=\\())'
+    'match': '(?<!,\\s)(?<!,)@?\\b(?!decodeURI(Component)?|encodeURI(Component)?|eval|parse(Float|Int))(\\w+)(?=\\s+(?!(default|do|lte|gte|lt|gt|of|in|is|isnt|and|or|for|else|onlyif|then|throws|when|where|no|if)\\b)(?=(@?\\w+|\\-\\d|\\[|\\{|\"|\'|\`))|(?=\\())'
     'captures':
       '4':
         'name': 'entity.name.function.cns'
@@ -298,7 +303,7 @@
   }
   {
     'comment': 'MATCHES some language constants'
-    'match': '\\b(default|Infinity|NaN|undefined)\\b'
+    'match': '\\b(Infinity|NaN|undefined)\\b'
     'name': 'constant.language.cns'
   }
   {

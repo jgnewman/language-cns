@@ -5,15 +5,18 @@
   'When':
     'prefix': 'when'
     'body': 'when\n\t${1:# condition -> ...}\n'
+  'Chain':
+    'prefix': 'chain'
+    'body': 'chain\n\t${1:# expression...}\n'
   'Match':
     'prefix': 'match'
     'body': 'match\n\t${1:# pattern -> ...}\n'
   'Caseof':
     'prefix': 'caseof'
     'body': 'caseof ${1:value}\n  ${2:condition} -> ${0:# body...}\n'
-  'Try … Catch':
+  'Try … Default':
     'prefix': 'try'
-    'body': 'try\n\t${1:# body...}\ncatch ${2:err}\n\t${0:# body...}\n'
+    'body': 'try\n\t${1:# body...}\ndefault ${2:err}\n\t${0:# body...}\n'
 '.string.quoted.double.cns:not(.string .source), .string.quoted.double.heredoc.cns:not(.string .source)':
   'Interpolated Code':
     'prefix': '$'
