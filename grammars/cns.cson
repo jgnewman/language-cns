@@ -7,11 +7,6 @@
 'firstLineMatch': '^#!.*\\bcns'
 'patterns': [
   {
-    'comment': 'MATCHES a < symbol'
-    'match': '<'
-    'name': 'keyword.operator.cns'
-  }
-  {
     'comment': 'MATCHES a scope binding operator'
     'match': '::'
     'name': 'storage.type.function.cns'
@@ -88,7 +83,7 @@
     'match': '(<)([a-zA-Z0-9\-]+)'
     'captures':
       '1':
-        'name': 'source.cns'
+        'name': 'keyword.operator.cns'
       '2':
         'name': 'constant.language.cns'
   }
@@ -97,15 +92,15 @@
     'match': '(<\/)([a-zA-Z0-9\-]+)(>)'
     'captures':
       '1':
-        'name': 'source.cns'
+        'name': 'keyword.operator.cns'
       '2':
         'name': 'constant.language.cns'
       '3':
-        'name': 'source.cns'
+        'name': 'keyword.operator.cns'
   }
   {
     'comment': 'MATCHES a control word'
-    'match': '\\b(?<![\\.\\$])(caseof|default|else|end|fn|for|from|incase|in|if|match|onlyif|then|throws|try|when|where|(?<=for)\\s+own)(?!\\s*:)\\b'
+    'match': '\\b(?<![\\.\\$])(caseof|chain|default|else|end|fn|for|from|incase|in|if|match|onlyif|then|throws|try|when|where|(?<=for)\\s+own)(?!\\s*:)\\b'
     'name': 'keyword.control.cns'
   }
   {
