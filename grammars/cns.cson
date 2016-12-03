@@ -17,6 +17,11 @@
     'name': 'storage.type.function.cns'
   }
   {
+    'comment': 'MATCHES a backward arrow operator'
+    'match': '<-'
+    'name': 'keyword.operator.cns'
+  }
+  {
     'comment': 'MATCHES a backtick string'
     'begin': '`'
     'beginCaptures':
