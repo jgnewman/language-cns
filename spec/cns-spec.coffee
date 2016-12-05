@@ -15,6 +15,12 @@ describe "Cream & Sugar grammar", ->
     expect(grammar).toBeTruthy()
     expect(grammar.scopeName).toBe "source.cns"
 
+  it "tokenizes regexp", ->
+    {tokens} = grammar.tokenizeLine("/^#\/?/")
+
+    expect(tokens[0]).toEqual value: "/^#\/?/", scopes: ["source.cns", "string.regexp.cns"]
+
+
   it "tokenizes comments", ->
     {tokens} = grammar.tokenizeLine("# I am a comment")
 
